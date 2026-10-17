@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada · Rede Relâmpago · Ciências 6º</title>
+<style>
+  :root{
+    --palco:#0b1020; --palco2:#141a2e; --aco:#242c44; --aco2:#343f63;
+    --ambar:#ffcf33; --magenta:#ff4d9d; --ciano:#2dd4ff; --verde:#3ddc84; --verde2:#248a56;
+    --vermelho:#ff5d5d; --texto:#eaf0f8; --cinza:#8f98b2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:
+    radial-gradient(1100px 480px at 50% -10%,#15214a,#0b1020 60%),var(--palco);
+    color:var(--texto);line-height:1.6;padding-bottom:60px}
+  header{background:linear-gradient(120deg,#0e1a3e,#1a2a55);padding:26px 18px;text-align:center;
+    box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--ciano)}
+  header .selo{font-size:.78rem;letter-spacing:2px;color:#bfe9ff;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#cfe0f5;font-size:.92rem}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;
+    border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+  .barra-nav a.on{background:var(--ciano);color:#042030;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+  .intro ol{margin:8px 0 0 20px}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+    background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+  button{cursor:pointer;font-family:inherit}
+  .mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+  .mini:hover{background:#1c2340}
+  .bloco{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.35)}
+  .bloco.travado{opacity:.55}
+  .bloco-cab{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#161f3c,#1d2950);border-bottom:1px solid var(--aco)}
+  .bloco-cab .num{background:var(--ciano);color:#042030;font-weight:bold;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .bloco.c16 .bloco-cab .num{background:var(--magenta);color:#2a0618}
+  .bloco-cab h3{font-size:1.06rem;color:#fff}
+  .bloco-cab .porto{font-size:.7rem;color:var(--cinza);letter-spacing:1px;text-transform:uppercase}
+  .bloco-corpo{padding:16px}
+  .texto p{margin-bottom:10px}
+  .texto ul{margin:0 0 10px 20px}
+  .texto li{margin-bottom:5px}
+  .texto .destaque{color:var(--ciano);font-weight:bold}
+  .bloco.c16 .texto .destaque{color:var(--magenta)}
+  .olhar{background:#1a1030;border-left:3px solid var(--amarelo,#ffcf33);border-left-color:var(--ambar);padding:8px 12px;margin:0 0 10px;border-radius:0 8px 8px 0;font-size:.92rem}
+  .olhar b{color:var(--ambar)}
+  .cadeado{padding:22px 16px;text-align:center;color:var(--cinza);font-size:.9rem}
+  .perg{background:#12193a;border:1px solid var(--aco);border-radius:12px;padding:12px;margin-top:14px}
+  .perg.red{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho)}
+  .perg .tag{display:inline-block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+  .tag.conc{background:#0e3a44;color:#8fd9e4}
+  .tag.apl{background:#1d4530;color:#a7e0bf}
+  .perg label{display:block;font-weight:600;margin-bottom:8px}
+  .perg textarea{width:100%;min-height:70px;background:#0a0f20;color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:9px;font-family:inherit;font-size:.95rem;resize:vertical}
+  .aviso{margin-top:8px;padding:9px 11px;border-radius:8px;font-size:.85rem;display:none}
+  .aviso.amarelo{display:block;background:#4a3d12;border:1px solid var(--ambar);color:#ffe9ad}
+  .aviso.vermelho{display:block;background:#4a1717;border:1px solid var(--vermelho);color:#ffc9c9}
+  .modelo{margin-top:10px;padding:10px 12px;background:#0e2b1f;border:1px solid var(--verde);border-radius:8px;font-size:.9rem;display:none}
+  .modelo.show{display:block}
+  .modelo .lab{color:#8fe0b4;font-weight:bold;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+  .chk{margin-top:10px;font-size:.88rem}
+  .chk .item{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+  .chk .item span{flex:1;min-width:180px}
+  .chk .simnao button{border:1px solid var(--aco2);background:#0a0f20;color:var(--texto);border-radius:6px;padding:4px 10px;margin-left:4px;font-size:.8rem}
+  .chk .simnao button.sim.ativo{background:var(--verde);border-color:var(--verde);color:#04231a}
+  .chk .simnao button.nao.ativo{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+  .conferir{margin-top:14px;background:var(--verde);color:#04231a;border:none;border-radius:10px;padding:11px 18px;font-size:1rem;font-weight:bold;width:100%}
+  .conferir:disabled{background:#1c2340;color:#6f7794;cursor:not-allowed}
+  .status-bloco{margin-top:10px;text-align:center;font-weight:bold;font-size:.95rem}
+  .prox{margin-top:12px;text-align:center}
+  .prox a{color:var(--ciano);text-decoration:none;font-weight:bold}
+  .peg{background:#3a1414;border:2px solid var(--vermelho);border-radius:16px;padding:16px;margin-top:20px}
+  .peg h3{color:#ffb3b3;margin-bottom:10px}
+  .peg ol{margin-left:20px}
+  .peg li{margin-bottom:7px}
+  .cobertura{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;margin-top:18px}
+  .cobertura h3{color:var(--ciano);margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{border:1px solid var(--aco);padding:7px 9px;text-align:left}
+  th{background:#161f3c}
+  .revisar{background:#3a2e06;border:2px solid var(--ambar);border-radius:16px;padding:16px;margin-top:18px}
+  .revisar h3{color:var(--ambar);margin-bottom:8px}
+  .revisar ul{margin-left:18px}
+  .relatorio{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin-top:18px;font-size:.9rem}
+  .relatorio h3{color:var(--ciano);margin-bottom:8px}
+  .trilha-fim{background:linear-gradient(120deg,#122a1f,#163a2a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+  .trilha-fim h3{color:#8fe0b4;margin-bottom:8px}
+  .trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#04231a;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+  .trilha-fim a.btn.off{background:#1c2340;color:#6f7794;pointer-events:none}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:20px;max-width:420px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal button{background:var(--ciano);color:#042030;border:none;border-radius:8px;padding:9px 16px;font-weight:bold}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Rede Relâmpago · Ciências 6º ano · CCF</div>
+  <h1>📖 Leitura Guiada</h1>
+  <p>Capítulos 15 e 16 · Prova 22/10 · Callis Ciências 6 – Livro 2 (pp. 40–85)</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a class="on" href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html" data-etapa="quiz">🎯 Quiz</a>
+    <a href="resumo.html" data-etapa="resumo">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>⚡ Como percorrer a Rede Relâmpago</h2>
+    <p>Seu corpo é uma <b>rede de cabos ultrarrápida</b>: as mensagens viajam como relâmpagos, um centro de comando decide e os sentidos captam o mundo (luz e som). Esta leitura tem <b>11 postos</b>: os <b>7 primeiros</b> são do sistema nervoso (Capítulo 15) e os <b>4 últimos</b>, dos sentidos visão e audição (Capítulo 16). Em cada posto, leia e <b>escreva com as suas palavras</b> as respostas das 3 perguntas. O próximo posto só liga quando você conferir o anterior.</p>
+    <ol>
+      <li>Leia o posto com calma (tudo aqui vem do seu livro).</li>
+      <li>Responda as 3 perguntas <b>escrevendo</b> (não vale copiar o texto).</li>
+      <li>Clique em <b>Conferir</b>: aparece a resposta-modelo e uma autoavaliação Sim/Não.</li>
+      <li>Com os 11 postos conferidos e a autoavaliação respondida, o <b>🎯 Quiz destrava</b>.</li>
+    </ol>
+  </div>
+
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="peg">
+    <h3>⚠️ 12 Pegadinhas da Prova (não caia nelas!)</h3>
+    <ol>
+      <li><b>Voluntário × involuntário:</b> voluntário é o que você decide (caminhar, mastigar); involuntário acontece sozinho (batimentos do coração, sentir fome). O sistema nervoso cuida dos dois.</li>
+      <li><b>Neurônio ≠ nervo.</b> O <b>neurônio</b> é a célula; o <b>nervo</b> é um feixe de fibras (um conjunto). Dizer "neurônio é um conjunto de nervos" está ERRADO (é o contrário).</li>
+      <li><b>Sinapse:</b> os neurônios NÃO se tocam. Eles se comunicam por <b>neurotransmissores</b> (substâncias químicas) liberados no espaço entre um e outro. O impulso vai <b>sempre no mesmo sentido</b>.</li>
+      <li><b>SNC × SNP:</b> o <b>Central (SNC)</b> = encéfalo + medula espinal (interpreta). O <b>Periférico (SNP)</b> = os nervos (transportam). Não troque os dois.</li>
+      <li><b>Encéfalo ≠ cérebro.</b> O <b>encéfalo</b> tem três partes: <b>cérebro, cerebelo e tronco encefálico</b>. O cérebro é só uma delas.</li>
+      <li><b>Quem controla a respiração e os batimentos é o TRONCO ENCEFÁLICO</b>, não o cérebro. O <b>cerebelo</b> cuida do equilíbrio e da coordenação dos movimentos.</li>
+      <li><b>Meninges</b> = <b>três membranas</b> que revestem o encéfalo e a medula. <b>Meningite</b> = inflamação dessas membranas (por vírus ou bactérias).</li>
+      <li><b>Arco reflexo:</b> na resposta super-rápida, o impulso é interpretado direto pela <b>medula espinal</b>, SEM passar pelo cérebro. A dor chega só depois.</li>
+      <li><b>SNP somático × autônomo:</b> <b>somático</b> = ações voluntárias; <b>autônomo</b> = involuntárias (coração, rins, digestão).</li>
+      <li><b>Drogas:</b> <b>depressoras</b> diminuem a atividade dos neurônios; <b>estimulantes</b> aumentam (agitação/euforia); <b>perturbadoras</b> distorcem a percepção da realidade.</li>
+      <li><b>Cones × bastonetes:</b> <b>cones</b> = cores e detalhes na luz; <b>bastonetes</b> = enxergar no escuro (pouca luz). A imagem chega <b>invertida</b> na retina.</li>
+      <li><b>Miopia × hipermetropia:</b> miopia = não vê bem de <b>longe</b> (lentes <b>divergentes</b>); hipermetropia = não vê bem de <b>perto</b> (lentes <b>convergentes</b>). Catarata = perda da <b>transparência da lente</b>.</li>
+    </ol>
+  </div>
+
+  <div class="cobertura">
+    <h3>🧭 Cobertura: Tópico → Posto</h3>
+    <table>
+      <thead><tr><th>Tópico da prova</th><th>Páginas (Callis Ciências 6 – L2)</th><th>Posto</th></tr></thead>
+      <tbody>
+        <tr><td>O que é o sistema nervoso; estímulos; voluntário/involuntário; impulsos</td><td>40, 44</td><td>1</td></tr>
+        <tr><td>Coordenação nos animais: centralizado, difuso, ganglionar; invertebrados</td><td>42–43</td><td>2</td></tr>
+        <tr><td>Neurônios, impulso nervoso, axônio, sinapses e neurotransmissores</td><td>45–46</td><td>3</td></tr>
+        <tr><td>SNC, encéfalo (cérebro/cerebelo/tronco), proteção, meninges, meningite</td><td>47–48</td><td>4</td></tr>
+        <tr><td>Medula espinal, arco reflexo, lesão medular</td><td>49–50, 52–53</td><td>5</td></tr>
+        <tr><td>SNP (somático/autônomo) e tipos de neurônios (sensitivo/associação/motor/misto)</td><td>51–52</td><td>6</td></tr>
+        <tr><td>Drogas e o sistema nervoso (depressoras, estimulantes, perturbadoras)</td><td>57</td><td>7</td></tr>
+        <tr><td>Sistema sensorial; a visão e a luz; reflexão da luz</td><td>64–65</td><td>8</td></tr>
+        <tr><td>O olho por dentro; retina, cones e bastonetes; imagem invertida; ponto cego</td><td>66–69, 74</td><td>9</td></tr>
+        <tr><td>Distúrbios visuais; daltonismo; deficiência visual e Braile</td><td>70–73, 78–79</td><td>10</td></tr>
+        <tr><td>Audição: ondas sonoras, caminho do som, orelha, equilíbrio, Libras</td><td>75–81</td><td>11</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="revisar" id="revisar" style="display:none">
+    <h3>🔁 Para revisar antes da prova</h3>
+    <ul id="revisar-lista"></ul>
+  </div>
+
+  <div class="relatorio">
+    <h3>📊 Para os pais (resumo desta leitura)</h3>
+    <div id="rel-conteudo">Assim que o aprendiz for conferindo os postos, o resumo aparece aqui.</div>
+  </div>
+
+  <div class="trilha-fim" id="trilha-fim">
+    <h3>🔒 Próxima etapa: Quiz</h3>
+    <p id="trilha-fim-txt">O Quiz destrava quando os 11 postos estiverem conferidos e a autoavaliação respondida.</p>
+    <a class="btn off" id="btn-prox" href="quiz.html">🎯 Ir para o Quiz</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. ⚡ Boa prova!</div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <p id="modal-txt"></p>
+    <button onclick="fecharModal()" id="modal-ok">Ok</button>
+    <button class="mini" onclick="fecharModal()" id="modal-cancel" style="display:none;margin-left:8px">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='rede_relampago';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); links[i].setAttribute('title','Ainda trancado'); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+
+/* ====== DADOS DOS POSTOS (conteúdo real do livro Callis Ciências 6 L2 — Caps 15 e 16) ====== */
+var BLOCOS = [
+ {
+  porto:"Posto 1 · Capítulo 15", emoji:"⚡", u:"c15",
+  titulo:"O sistema nervoso: a central de mensagens do corpo",
+  texto:[
+   "O <span class='destaque'>sistema nervoso</span> é o <b>centro de controle</b> do corpo. Ele tem uma parte central e uma <b>rede de células nervosas</b> espalhada por todo o organismo que <b>recebe, transmite e reage</b> a estímulos.",
+   "Esses estímulos podem ser <span class='destaque'>externos</span> (vêm do ambiente, como um cheiro ou um barulho) ou <span class='destaque'>internos</span> (vêm do próprio corpo, como a fome). As respostas podem ser <span class='destaque'>voluntárias</span> (quando decidimos, como caminhar) ou <span class='destaque'>involuntárias</span> (acontecem sozinhas, como o coração bater).",
+   "As informações viajam por toda essa rede na forma de <b>impulsos nervosos</b>, até a parte central, que traduz o estímulo e desencadeia a resposta. Além de controlar as <b>funções vitais</b>, o sistema nervoso cuida das áreas do cérebro ligadas ao <b>aprendizado e à memória</b> — por isso, depois que aprendemos a andar de bicicleta, nunca mais esquecemos.",
+   "<div class='olhar'><b>Exemplos do livro:</b> sentir o perfume de uma flor e inspirar mais (voluntário) × sentir fome e o estômago roncar (involuntário). Dirigir, dançar ou digitar sem olhar o teclado viram ações quase automáticas depois de aprendidas.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Com as suas palavras, o que o sistema nervoso faz quando recebe um estímulo?",modelo:"Ele recebe o estímulo (externo ou interno), transmite essa informação como impulso nervoso até a parte central, que traduz e desencadeia uma resposta.",chk:["Falei que ele recebe e transmite o estímulo (por impulsos)?","Falei que a parte central interpreta e dá uma resposta?"]},
+   {tag:"apl",q:"Dê um exemplo SEU de uma ação voluntária e um de uma ação involuntária do seu dia a dia, e explique a diferença.",modelo:"Voluntária é a que eu decido fazer (ex.: levantar o braço, caminhar). Involuntária acontece sozinha, sem eu querer (ex.: o coração bater, piscar, sentir fome). A diferença é se há ou não uma decisão minha.",chk:["Dei um exemplo certo de ação voluntária e um de involuntária?","Expliquei que voluntário é decidido e involuntário acontece sozinho?"]},
+   {tag:"apl",q:"Explique para um colega por que conseguimos andar de bicicleta de forma quase automática depois de aprender.",modelo:"Porque o sistema nervoso guarda na memória as habilidades já aprendidas. Quando subimos na bicicleta, o cérebro retoma essas conexões e o equilíbrio e o pedalar acontecem quase sem a gente pensar.",chk:["Liguei isso à memória / ao aprendizado guardado pelo sistema nervoso?","Expliquei que o cérebro retoma o que já foi aprendido, deixando a ação automática?"]}
+  ]
+ },
+ {
+  porto:"Posto 2 · Capítulo 15", emoji:"🐙", u:"c15",
+  titulo:"Coordenação nos animais",
+  texto:[
+   "O sistema nervoso <b>integra todos os sistemas</b> do organismo de forma <b>harmônica</b>. Ele recebe estímulos externos e internos, traduz, interpreta e depois <b>arquiva</b> ou <b>envia uma resposta</b>. Mas nem todos os animais têm um sistema tão complexo quanto o nosso.",
+   "Nos animais, o sistema nervoso pode ser de três tipos:",
+   "<ul><li><span class='destaque'>Centralizado</span>: tem um centro nervoso ou um cérebro.</li><li><span class='destaque'>Difuso</span>: a rede nervosa é distribuída <b>igualmente pelo corpo</b> (sem um centro).</li><li><span class='destaque'>Ganglionar</span>: o animal tem <b>gânglios</b> espalhados pelo corpo coordenando as funções.</li></ul>",
+   "Animais <span class='destaque'>invertebrados</span>, como anêmonas, planárias e insetos, têm sistemas de coordenação <b>bem simples</b>, capazes de perceber apenas pequenos estímulos — usados principalmente para <b>capturar alimento</b> ou <b>se defender de predadores</b>.",
+   "<div class='olhar'><b>Olhar de prova:</b> um gato, ao saltar, usa o sistema nervoso para calcular a distância e a força das pernas. Tanto a ação voluntária (observar o ambiente) quanto a involuntária (o coração acelerar) dependem do sistema nervoso.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são os três tipos de sistema nervoso que os animais podem ter?",modelo:"Centralizado (tem um centro nervoso ou cérebro), difuso (rede espalhada igualmente pelo corpo) e ganglionar (tem gânglios pelo corpo).",chk:["Citei os três nomes (centralizado, difuso, ganglionar)?","Expliquei pelo menos uma diferença entre eles?"]},
+   {tag:"apl",q:"Por que o livro diz que o sistema de coordenação de uma anêmona ou de um inseto é 'simples'? Para que ele serve?",modelo:"Porque esses invertebrados percebem e coordenam apenas pequenos estímulos e reações. Esse sistema simples serve principalmente para capturar alimento e para se defender de predadores.",chk:["Falei que ele percebe só pequenos estímulos/reações?","Falei para que serve (capturar alimento / se defender)?"]},
+   {tag:"apl",q:"Explique como o sistema nervoso ajuda um gato a saltar de um lugar para o outro sem se machucar.",modelo:"O sistema nervoso do gato observa o local de chegada e calcula a distância e a força que ele precisa colocar nas pernas, coordenando o salto para que ele chegue ao outro lado sem cair.",chk:["Falei que o sistema nervoso calcula distância/força do salto?","Liguei isso a uma resposta coordenada para não cair/se machucar?"]}
+  ]
+ },
+ {
+  porto:"Posto 3 · Capítulo 15", emoji:"🔌", u:"c15",
+  titulo:"Cabos vivos: neurônios, impulso e sinapses",
+  texto:[
+   "As principais células do sistema nervoso são os <span class='destaque'>neurônios</span>. Eles recebem e processam os estímulos e os transmitem para outros neurônios ou para outros tipos de célula, para produzir a resposta certa.",
+   "Os estímulos desencadeiam <span class='destaque'>impulsos nervosos</span>, que começam no neurônio, percorrem toda a sua estrutura e depois passam para outros neurônios em regiões chamadas <b>sinapses</b>. O impulso é propagado <b>muito rápido</b> e <b>sempre caminha no mesmo sentido</b>. O <b>axônio</b> pode ter ramificações na ponta para levar a mesma informação a vários neurônios ao mesmo tempo.",
+   "O detalhe mais importante: na <span class='destaque'>sinapse</span>, os neurônios <b>não estão colados</b> um no outro. Eles se comunicam por substâncias químicas chamadas <span class='destaque'>neurotransmissores</span>, que são liberadas no <b>pequeno espaço</b> entre um neurônio e outro e levam a informação ao neurônio seguinte.",
+   "<div class='olhar'><b>Veja a ligação com a saúde:</b> a atividade física libera os 'hormônios do bem-estar' (como <b>serotonina</b> e <b>endorfinas</b>), ajuda a prevenir doenças como Alzheimer e Parkinson e <b>aumenta o número de sinapses</b> entre os neurônios.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que é uma sinapse e o que são os neurotransmissores?",modelo:"A sinapse é o pequeno espaço entre dois neurônios (que não se tocam). Os neurotransmissores são as substâncias químicas liberadas nesse espaço, que levam a informação de um neurônio para o outro.",chk:["Disse que a sinapse é o espaço entre neurônios (que não se tocam)?","Disse que os neurotransmissores são substâncias químicas que passam a informação?"]},
+   {tag:"apl",q:"Um colega disse: 'os neurônios ficam colados uns nos outros e o impulso vai e volta'. Corrija as duas coisas erradas na frase dele.",modelo:"Os neurônios NÃO ficam colados — há um espaço (a sinapse) entre eles, por onde passam os neurotransmissores. E o impulso NÃO vai e volta: ele caminha sempre no mesmo sentido.",chk:["Corrigi que os neurônios não se tocam (há a sinapse)?","Corrigi que o impulso vai sempre no mesmo sentido?"]},
+   {tag:"apl",q:"Explique, com as suas palavras, por que fazer atividade física faz bem para o cérebro.",modelo:"Porque a atividade física libera hormônios do bem-estar (como serotonina e endorfinas), que diminuem a ansiedade, e aumenta o número de sinapses entre os neurônios, melhorando o funcionamento do cérebro e ajudando a prevenir doenças.",chk:["Citei os hormônios do bem-estar (serotonina/endorfinas) ou a redução da ansiedade?","Citei o aumento das sinapses / melhora do cérebro?"]}
+  ]
+ },
+ {
+  porto:"Posto 4 · Capítulo 15", emoji:"🧠", u:"c15",
+  titulo:"Central de Comando: o sistema nervoso central",
+  texto:[
+   "O sistema nervoso humano tem duas grandes divisões. A primeira é o <span class='destaque'>Sistema Nervoso Central (SNC)</span>, encarregado de <b>interpretar</b> as informações recebidas. Ele é formado pelo <b>encéfalo</b> e pela <b>medula espinal</b>.",
+   "O <span class='destaque'>encéfalo</span> fica dentro do crânio e tem <b>três partes</b>: o <b>cérebro</b> (raciocínio, aprendizado, memória e emoções), o <b>cerebelo</b> (equilíbrio e coordenação dos movimentos) e o <b>tronco encefálico</b> (faz a comunicação entre o cérebro e a medula e controla ações como os <b>batimentos cardíacos e a respiração</b>).",
+   "Como o SNC é muito frágil, ele é bem protegido: o <span class='destaque'>crânio</span> envolve o encéfalo e o início da medula; a <span class='destaque'>coluna vertebral</span> protege o resto da medula; e três membranas chamadas <span class='destaque'>meninges</span> envolvem tudo.",
+   "<div class='olhar'><b>Ampliando — Meningite:</b> é a inflamação das meninges, causada principalmente por <b>bactérias e vírus</b>. Os sintomas são dor de cabeça forte, febre e rigidez na nuca. Existem <b>vacinas</b> que previnem algumas formas da doença.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são as três partes do encéfalo e quem faz parte do Sistema Nervoso Central?",modelo:"O encéfalo tem três partes: cérebro, cerebelo e tronco encefálico. O Sistema Nervoso Central é formado pelo encéfalo e pela medula espinal.",chk:["Citei as três partes do encéfalo (cérebro, cerebelo, tronco encefálico)?","Disse que o SNC é formado por encéfalo + medula espinal?"]},
+   {tag:"apl",q:"Numa prova, aparece: 'o cérebro é a parte do encéfalo que controla a respiração e os batimentos do coração'. Isso está certo? Corrija se precisar.",modelo:"Está errado. Quem controla a respiração e os batimentos cardíacos é o tronco encefálico, não o cérebro. O cérebro cuida do raciocínio, da memória e das emoções.",chk:["Disse que está errado?","Falei que quem controla respiração/batimentos é o tronco encefálico?"]},
+   {tag:"apl",q:"Explique, com as suas palavras, o que são as meninges e o que acontece na meningite.",modelo:"As meninges são três membranas que envolvem e protegem o encéfalo e a medula espinal. Na meningite, essas membranas ficam inflamadas (por vírus ou bactérias), causando dor de cabeça forte, febre e rigidez na nuca.",chk:["Disse que as meninges são três membranas que protegem encéfalo/medula?","Disse que a meningite é a inflamação delas (por vírus/bactéria)?"]}
+  ]
+ },
+ {
+  porto:"Posto 5 · Capítulo 15", emoji:"🦴", u:"c15",
+  titulo:"Reflexo Relâmpago: a medula espinal e o arco reflexo",
+  texto:[
+   "A <span class='destaque'>medula espinal</span> começa logo depois do tronco encefálico e vai até o fim da coluna vertebral, protegida pelas vértebras. Ela é um cordão de fibras nervosas que recebe e transmite as informações do corpo.",
+   "Além de levar informações, a medula também é capaz de dar <span class='destaque'>respostas rápidas</span> sozinha, sem que elas precisem ir até o encéfalo. Isso acontece em situações de <b>emergência</b>, que exigem uma reação imediata — os <b>reflexos</b>.",
+   "Quando encostamos em algo muito quente ou espetamos o dedo, acontece um <span class='destaque'>ato reflexo</span>. O impulso percorre um caminho chamado <b>arco reflexo</b>: ele NÃO chega ao cérebro, é interpretado <b>direto pela medula espinal</b>, que manda a resposta rápida de retirar a mão. Só <b>depois</b> o impulso chega ao cérebro e é sentido como <b>dor</b> — por isso tiramos a mão antes mesmo de sentir dor.",
+   "<div class='olhar'><b>Aplicando o assunto — lesão medular:</b> uma lesão na medula interrompe a comunicação entre as partes abaixo da lesão e o encéfalo, causando perda de sensibilidade e de movimentos. Quanto mais perto da cabeça, maior a parte do corpo comprometida (ex.: o caso da ginasta Laís Souza, que ficou tetraplégica).</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"No arco reflexo, qual órgão interpreta o estímulo e dá a resposta rápida? E quando sentimos a dor?",modelo:"Quem interpreta o estímulo e manda a resposta rápida é a medula espinal (sem passar pelo cérebro). A dor só é sentida depois, quando o impulso chega ao cérebro.",chk:["Disse que é a medula espinal que dá a resposta rápida (sem o cérebro)?","Disse que a dor chega depois, no cérebro?"]},
+   {tag:"apl",q:"Você pisa num espinho e tira o pé num susto, antes de sentir dor. Explique por que isso acontece, usando a ideia de arco reflexo.",modelo:"Porque o estímulo do espinho segue o arco reflexo: é interpretado direto pela medula espinal, que ordena rapidamente tirar o pé, sem esperar o cérebro. A dor só chega depois, quando o impulso alcança o cérebro.",chk:["Expliquei que a medula age primeiro (resposta rápida, sem o cérebro)?","Expliquei que a dor vem depois, ao chegar ao cérebro?"]},
+   {tag:"apl",q:"Por que uma lesão mais próxima da cabeça compromete uma parte maior do corpo? Explique com as suas palavras.",modelo:"Porque todas as partes do corpo que ficam abaixo da lesão perdem a comunicação com o encéfalo. Quanto mais alta (perto da cabeça) for a lesão, mais partes ficam 'abaixo' dela e, por isso, mais regiões ficam sem movimento e sem sensibilidade.",chk:["Falei que as partes abaixo da lesão perdem a comunicação com o encéfalo?","Expliquei que quanto mais alta a lesão, maior a parte comprometida?"]}
+  ]
+ },
+ {
+  porto:"Posto 6 · Capítulo 15", emoji:"🛰️", u:"c15",
+  titulo:"Rotas periféricas: nervos e tipos de neurônios",
+  texto:[
+   "A segunda grande divisão é o <span class='destaque'>Sistema Nervoso Periférico (SNP)</span>, formado pelos <b>nervos</b> (que nascem no encéfalo e na medula). Sua função é <b>levar os estímulos</b> até o SNC e <b>trazer de volta</b> as respostas.",
+   "O SNP se divide em dois: o <span class='destaque'>somático</span>, que regula as ações <b>voluntárias</b> (como caminhar e mastigar), e o <span class='destaque'>autônomo</span>, que regula as ações <b>involuntárias</b> (como os batimentos cardíacos e o funcionamento dos rins).",
+   "Os <b>nervos</b> são feixes de fibras nervosas. Dentro deles há diferentes tipos de neurônio, conforme a função:",
+   "<ul><li><span class='destaque'>Neurônios sensitivos</span>: recebem os estímulos e os levam até o SNC.</li><li><span class='destaque'>Neurônios de associação</span>: recebem a informação dos sensitivos dentro do SNC.</li><li><span class='destaque'>Neurônios motores</span>: levam a resposta até os <b>órgãos efetores</b> (músculos e glândulas).</li></ul>",
+   "<div class='olhar'><b>Olhar de prova:</b> existem ainda os <b>nervos mistos</b>, formados por neurônios sensitivos E motores ao mesmo tempo.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre o SNP somático e o SNP autônomo?",modelo:"O somático regula as ações voluntárias (como caminhar e mastigar). O autônomo regula as ações involuntárias (como os batimentos cardíacos e o funcionamento dos rins).",chk:["Disse que o somático cuida das ações voluntárias?","Disse que o autônomo cuida das ações involuntárias?"]},
+   {tag:"apl",q:"Imagine o caminho do estímulo desde um som até o movimento de resposta. Em que ordem entram os neurônios sensitivos, de associação e motores?",modelo:"Primeiro os neurônios sensitivos recebem o estímulo e o levam ao SNC; lá os neurônios de associação recebem e processam a informação; depois os neurônios motores levam a resposta até os músculos ou glândulas (órgãos efetores).",chk:["Coloquei a ordem certa: sensitivos → associação → motores?","Falei que os motores levam a resposta aos músculos/glândulas?"]},
+   {tag:"apl",q:"O que é um nervo misto? Dê a sua explicação.",modelo:"É um nervo formado por neurônios dos dois tipos ao mesmo tempo: sensitivos (que trazem o estímulo) e motores (que levam a resposta).",chk:["Disse que o nervo misto tem neurônios sensitivos e motores juntos?","Escrevi com as minhas palavras (não copiei o texto)?"]}
+  ]
+ },
+ {
+  porto:"Posto 7 · Capítulo 15", emoji:"⚠️", u:"c15",
+  titulo:"Alertas na rede: as drogas e o sistema nervoso",
+  texto:[
+   "<span class='destaque'>Drogas</span> são substâncias que não são produzidas pelo nosso corpo. Quando <b>prescritas por profissionais da saúde</b>, muitas atuam como medicamentos — e, em geral, agem direto no <b>sistema nervoso central</b>.",
+   "Um <b>analgésico</b> (remédio para dor), por exemplo, bloqueia os receptores que avisam o cérebro de uma lesão. Sem receber a informação, o cérebro deixa de mandar a resposta de dor. Esses remédios se espalham pelo sangue até chegar ao local afetado.",
+   "As drogas podem ser classificadas em três grupos, conforme o efeito no sistema nervoso:",
+   "<ul><li><span class='destaque'>Depressoras</span>: <b>diminuem</b> a atividade dos neurônios.</li><li><span class='destaque'>Estimulantes</span>: <b>aumentam</b> a atividade dos neurônios (provocam agitação e euforia, seguidas de depressão).</li><li><span class='destaque'>Perturbadoras</span>: <b>distorcem</b> a percepção da realidade.</li></ul>",
+   "<div class='olhar'><b>Atenção à saúde:</b> usadas sem prescrição ou em excesso, as drogas podem causar <b>dependência</b>, danos aos neurônios (prejudicando memória e reações) e, em casos de abuso, levar à morte por <b>overdose</b>.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são os três grupos em que as drogas podem ser classificadas, segundo o efeito no sistema nervoso?",modelo:"Depressoras (diminuem a atividade dos neurônios), estimulantes (aumentam a atividade) e perturbadoras (distorcem a percepção da realidade).",chk:["Citei os três grupos (depressoras, estimulantes, perturbadoras)?","Liguei pelo menos um deles ao seu efeito (diminuir/aumentar/distorcer)?"]},
+   {tag:"apl",q:"Explique, com as suas palavras, como um remédio para dor (analgésico) faz a dor passar.",modelo:"O analgésico bloqueia os receptores que avisariam o cérebro sobre a lesão. Como o cérebro não recebe mais essa informação, ele deixa de enviar a resposta de dor, e a gente para de sentir.",chk:["Falei que ele bloqueia os receptores / o aviso ao cérebro?","Falei que, sem a informação, o cérebro não gera a dor?"]},
+   {tag:"apl",q:"Por que o livro diz que usar drogas sem prescrição ou em excesso é perigoso? Cite dois riscos.",modelo:"Porque pode causar dependência e danos aos neurônios (prejudicando a memória e o tempo de reação); em casos de abuso, pode até levar à morte por overdose.",chk:["Citei a dependência e/ou danos aos neurônios?","Citei outro risco (prejuízo à memória/reação ou overdose)?"]}
+  ]
+ },
+ {
+  porto:"Posto 8 · Capítulo 16", emoji:"📡", u:"c16",
+  titulo:"Captadores do mundo: o sistema sensorial e a luz",
+  texto:[
+   "Para reagir ao mundo, dependemos dos <span class='destaque'>órgãos dos sentidos</span>: olhos, orelhas, cavidades nasais, língua e pele. Eles têm <b>receptores sensoriais</b> que convertem os estímulos em <b>impulsos nervosos</b>, conduzidos pelos <b>nervos</b> até o cérebro, onde viram sensações. Quanto mais receptores uma área tem, <b>mais sensível</b> ela é.",
+   "Os estímulos captados podem ser <span class='destaque'>sonoros, térmicos, de pressão, luminosos ou químicos</span>. Neste capítulo, o foco são dois sentidos: a <b>visão</b> e a <b>audição</b>.",
+   "A <span class='destaque'>visão</span> é a capacidade de enxergar. Ela depende da <b>luz</b>, que é um tipo de <b>onda eletromagnética</b>, capaz de sensibilizar os nossos olhos.",
+   "Para enxergar um objeto, ele precisa ser <b>iluminado por uma fonte de luz</b> e <b>refletir</b> essa luz. A luz sai da fonte, é refletida pelo objeto e captada pelos olhos — por isso, <b>no escuro total não dá para ver</b>: não há luz para o objeto refletir.",
+   "<div class='olhar'><b>Olhar de prova:</b> a luz (onda eletromagnética) é diferente do som. A luz consegue atravessar o vácuo; o som, não — isso será importante no posto da audição.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a função dos receptores sensoriais dos órgãos dos sentidos?",modelo:"Eles captam os estímulos do ambiente e os transformam em impulsos nervosos, que são conduzidos pelos nervos até o cérebro, onde se transformam em sensações.",chk:["Disse que eles captam estímulos e os transformam em impulsos nervosos?","Disse que esses impulsos vão ao cérebro e viram sensações?"]},
+   {tag:"apl",q:"Explique para um colega por que não conseguimos enxergar um objeto num quarto totalmente escuro.",modelo:"Porque, para enxergar, o objeto precisa ser iluminado por uma fonte de luz e refletir essa luz até os nossos olhos. Sem luz, não há nada para o objeto refletir, então não há como vê-lo.",chk:["Falei que é preciso luz para o objeto refletir?","Liguei a visão à luz refletida que chega aos olhos?"]},
+   {tag:"apl",q:"Classifique os estímulos destes exemplos: a luz de um farol, o barulho de um carro e o cheiro de um pão. (use: luminoso, sonoro, químico)",modelo:"A luz do farol é um estímulo luminoso; o barulho do carro é um estímulo sonoro; o cheiro do pão é um estímulo químico.",chk:["Acertei luminoso (luz) e sonoro (barulho)?","Acertei químico (cheiro)?"]}
+  ]
+ },
+ {
+  porto:"Posto 9 · Capítulo 16", emoji:"👁️", u:"c16",
+  titulo:"Captador de Luz: o olho por dentro",
+  texto:[
+   "Os olhos ficam protegidos nas <span class='destaque'>órbitas oculares</span> (cavidades de ossos do crânio e da face). O <span class='destaque'>bulbo do olho</span> (o 'globo ocular') é formado por três camadas: <b>esclera</b> (a mais externa, resistente, dá a forma), <b>corioide</b> e <b>retina</b>.",
+   "Na parte da frente estão as estruturas que controlam a luz: a <span class='destaque'>córnea</span> (permite a entrada da luz e ajuda a focalizar), a <span class='destaque'>lente</span> ou <b>cristalino</b> (transparente, muda de forma para ajustar o foco) e a <span class='destaque'>íris</span> (os músculos coloridos que controlam o tamanho da <b>pupila</b>, o orifício por onde a luz entra). No escuro a pupila <b>dilata</b> (entra mais luz); na claridade, <b>contrai</b>.",
+   "A <span class='destaque'>retina</span> fica no fundo do olho e é cheia de <b>células fotorreceptoras</b> (sensíveis à luz), que transformam a luz em impulsos nervosos levados ao cérebro pelo <b>nervo óptico</b>. Há dois tipos: os <span class='destaque'>bastonetes</span> (enxergar no <b>escuro</b>, com pouca luz) e os <span class='destaque'>cones</span> (<b>cores e detalhes</b> na claridade; são de 3 tipos — azul, verde e vermelho).",
+   "<div class='olhar'><b>Detalhes importantes:</b> a imagem se forma <b>invertida</b> na retina, e o cérebro a interpreta na posição certa. O <b>ponto cego</b> é o lugar onde o nervo óptico se liga à retina — ali <b>não há fotorreceptores</b>, então não enxergamos a imagem que cai nesse ponto.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre os cones e os bastonetes da retina?",modelo:"Os cones são responsáveis pelas cores e pelos detalhes, funcionando em ambientes claros. Os bastonetes permitem enxergar no escuro, em ambientes com pouca luz.",chk:["Disse que os cones veem cores/detalhes (na claridade)?","Disse que os bastonetes servem para enxergar no escuro/pouca luz?"]},
+   {tag:"apl",q:"Você entra numa sala escura e, no começo, quase não enxerga; depois a vista melhora. Qual estrutura controla a entrada de luz e o que ela faz nesse momento?",modelo:"Quem controla é a pupila (governada pela íris). No escuro, a pupila dilata (aumenta) para deixar entrar mais luz na retina, ajudando a enxergar melhor.",chk:["Disse que é a pupila (controlada pela íris)?","Disse que no escuro ela dilata para entrar mais luz?"]},
+   {tag:"apl",q:"Descreva, com as suas palavras, o caminho da luz dentro do olho até virar uma imagem no cérebro.",modelo:"A luz entra pela córnea, passa pela pupila e pela lente (que ajusta o foco) e chega à retina, onde forma uma imagem invertida. Os cones e bastonetes transformam a luz em impulsos nervosos, que seguem pelo nervo óptico até o cérebro, que interpreta a imagem na posição certa.",chk:["Citei a passagem pela córnea/pupila/lente até a retina?","Falei do nervo óptico levando o impulso ao cérebro (e da imagem invertida)?"]}
+  ]
+ },
+ {
+  porto:"Posto 10 · Capítulo 16", emoji:"🕶️", u:"c16",
+  titulo:"Ajuste da lente: distúrbios visuais e inclusão",
+  texto:[
+   "Numa pessoa com <b>visão normal</b>, a imagem é projetada <b>exatamente na retina</b>. Quando isso não acontece, surgem os <span class='destaque'>distúrbios visuais</span>, que podem ser corrigidos com lentes (óculos) ou cirurgia:",
+   "<ul><li><span class='destaque'>Miopia</span>: dificuldade de ver de <b>longe</b> — corrigida com lentes <b>divergentes</b>.</li><li><span class='destaque'>Hipermetropia</span>: dificuldade de ver de <b>perto</b> — corrigida com lentes <b>convergentes</b>.</li><li><span class='destaque'>Astigmatismo</span>: curvatura irregular da córnea/lente — corrigido com lentes <b>cilíndricas</b>.</li><li><span class='destaque'>Catarata</span>: perda da <b>transparência da lente</b> — tratada trocando a lente por uma artificial.</li></ul>",
+   "O <span class='destaque'>daltonismo</span> (ou discromatopsia) é um distúrbio <b>hereditário</b>: há alteração ou ausência do pigmento dos <b>cones</b>, o que prejudica a distinção de cores. Ele é diagnosticado pelo <b>teste de Ishihara</b> (aqueles círculos coloridos que formam números).",
+   "<div class='olhar'><b>Inclusão:</b> a <b>deficiência visual</b> pode ter várias causas (catarata, falta de vitamina A, rubéola, diabetes, traumas). A cegueira total é chamada de <b>amaurose</b>. Recursos de apoio: vara-guia (bastão), piso tátil e cão-guia. O <b>Braile</b> foi criado por <b>Louis Braille</b> no século XIX: são 64 símbolos em quadros de 3 linhas e 2 colunas.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre miopia e hipermetropia, e que lente corrige cada uma?",modelo:"A miopia é a dificuldade de ver de longe, corrigida com lentes divergentes. A hipermetropia é a dificuldade de ver de perto, corrigida com lentes convergentes.",chk:["Disse que miopia é de longe (lente divergente)?","Disse que hipermetropia é de perto (lente convergente)?"]},
+   {tag:"apl",q:"Uma pessoa não consegue mais distinguir bem as cores. O médico fala em 'cones'. Qual distúrbio pode ser e como ele é testado?",modelo:"Pode ser o daltonismo (discromatopsia), que é hereditário e acontece por alteração ou ausência do pigmento dos cones. Ele é testado pelo teste de Ishihara (círculos coloridos que formam números).",chk:["Identifiquei o daltonismo (ligado aos cones)?","Citei o teste de Ishihara?"]},
+   {tag:"apl",q:"Explique o que é a catarata e por que ela atrapalha a visão.",modelo:"A catarata é a perda da transparência da lente (cristalino). Como a lente fica opaca, a luz não passa direito até a retina, e a visão fica turva. O tratamento é trocar a lente por uma artificial.",chk:["Disse que a catarata é a perda da transparência da lente?","Expliquei que isso atrapalha a passagem da luz / a nitidez?"]}
+  ]
+ },
+ {
+  porto:"Posto 11 · Capítulo 16", emoji:"👂", u:"c16",
+  titulo:"Captador de Som: a audição e o equilíbrio",
+  texto:[
+   "A <span class='destaque'>audição</span> é a percepção dos sons pela orelha. O som é feito de <span class='destaque'>ondas sonoras</span>, que são ondas <b>mecânicas</b>: elas só se propagam se houver um <b>meio material</b> (sólido, líquido ou gasoso). O som anda <b>mais rápido nos sólidos</b> (moléculas mais juntas) do que nos líquidos e gases.",
+   "A <span class='destaque'>orelha</span> capta as ondas sonoras e as transforma em impulsos nervosos. Ela se divide em <b>orelha externa, média e interna</b>. Veja o caminho do som:",
+   "<ul><li>1. O <b>pavilhão auricular</b> (orelha externa) capta as ondas sonoras.</li><li>2. As ondas chegam à <span class='destaque'>membrana timpânica</span> (o tímpano), que vibra.</li><li>3. A vibração passa para os três <span class='destaque'>ossículos: martelo, bigorna e estribo</span> (orelha média).</li><li>4. Chega à <span class='destaque'>cóclea</span> (orelha interna), onde um líquido se move e estimula células sensitivas, gerando impulsos nervosos.</li><li>5. Os impulsos vão pelo <b>nervo auditivo</b> até o cérebro, que os interpreta como som.</li></ul>",
+   "A orelha também cuida do <span class='destaque'>equilíbrio</span>: na orelha interna estão o <b>vestíbulo</b> e os <b>ductos semicirculares</b>, cheios de um líquido (a endolinfa) com cristais. Quando nos movemos, eles avisam o encéfalo sobre a posição do corpo. A <b>tuba auditiva</b> liga a orelha média à <b>faringe</b> e equilibra a pressão dos dois lados do tímpano (aquele 'ouvido tampado' no avião ou na serra).",
+   "<div class='olhar'><b>Inclusão:</b> a perda total de audição é a <b>surdez</b>. Recursos: próteses auditivas e implante coclear. A <b>Libras</b> (Língua Brasileira de Sinais) é uma língua visual-gestual — e <b>não é universal</b>: cada país tem a sua.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Por que o som precisa de um meio material para se propagar, e em qual meio ele anda mais rápido?",modelo:"Porque o som é uma onda mecânica: ele se propaga fazendo as moléculas do meio vibrarem; sem moléculas (no vácuo) ele não anda. Ele é mais rápido nos sólidos, onde as moléculas estão mais próximas umas das outras.",chk:["Disse que o som é onda mecânica e precisa de moléculas/meio material?","Disse que ele é mais rápido nos sólidos?"]},
+   {tag:"apl",q:"Coloque em ordem o caminho do som dentro da orelha, do pavilhão auricular até o cérebro.",modelo:"Pavilhão auricular capta → membrana timpânica vibra → ossículos (martelo, bigorna e estribo) → cóclea, onde o líquido estimula células sensitivas → nervo auditivo leva os impulsos ao cérebro, que interpreta como som.",chk:["Coloquei a ordem certa (pavilhão → tímpano → ossículos → cóclea)?","Terminei no nervo auditivo levando ao cérebro?"]},
+   {tag:"apl",q:"No avião, seu ouvido fica 'tampado'. Que estrutura ajuda a resolver isso e como? Explique com as suas palavras.",modelo:"É a tuba auditiva, que liga a orelha média à faringe (garganta). Ela equilibra a pressão dos dois lados da membrana timpânica; ao bocejar ou engolir, a tuba se abre e iguala as pressões, acabando com a sensação de ouvido tampado.",chk:["Citei a tuba auditiva (ligada à faringe)?","Expliquei que ela equilibra a pressão nos dois lados do tímpano?"]}
+  ]
+ }
+];
+
+/* ====== ESTADO E PERSISTÊNCIA ====== */
+var CHAVE=KIT+'_leitura_v1';
+var mem={};
+var estado=carregar();
+
+function carregar(){
+  try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s); }catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); }
+  return {blocos:{}};
+}
+function calcProgresso(){
+  var conf=0, chkPend=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estado.blocos[i]; if(!b||!b.conferido) return; conf++;
+    bloco.perguntas.forEach(function(p,j){ var ep=(b.perguntas&&b.perguntas[j])||{chk:{}}; p.chk.forEach(function(pt,k){ if(!ep.chk||!ep.chk[k]) chkPend++; }); });
+  });
+  estado.progresso={conferidos:conf,total:BLOCOS.length,chkPendentes:chkPend};
+  if(conf===BLOCOS.length && chkPend===0){ if(!estado.concluido){ estado.concluido=true; estado.concluidoEm=new Date().toISOString(); } }
+  return estado.progresso;
+}
+function salvar(){
+  calcProgresso();
+  var s=JSON.stringify(estado);
+  try{ localStorage.setItem(CHAVE,s); }catch(e){ mem[CHAVE]=s; }
+  var d=new Date();
+  document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR');
+  atualizarTrilhaFim();
+}
+function atualizarTrilhaFim(){
+  var p=estado.progresso||calcProgresso();
+  var box=document.getElementById('trilha-fim'), txt=document.getElementById('trilha-fim-txt'), btn=document.getElementById('btn-prox');
+  var h3=box.querySelector('h3');
+  if(estado.concluido||trilhaLiberada()){
+    h3.textContent='✅ Leitura concluída — Quiz destravado!';
+    txt.textContent=estado.concluido?'Você conferiu os 11 postos e respondeu a autoavaliação. Agora teste o que aprendeu.':'Trilha liberada pelos pais.';
+    btn.classList.remove('off');
+  } else {
+    h3.textContent='🔒 Próxima etapa: Quiz';
+    var faltam=p.total-p.conferidos;
+    txt.textContent=faltam>0 ? 'Destrava quando você conferir os '+p.total+' postos (faltam '+faltam+').' : 'Falta responder a autoavaliação Sim/Não de '+p.chkPendentes+' ponto(s) para destravar.';
+    btn.classList.add('off');
+  }
+  marcarNav();
+}
+function estBloco(i){ if(!estado.blocos[i]) estado.blocos[i]={aberto:i===0,conferido:false,perguntas:{}}; return estado.blocos[i]; }
+function estPerg(i,j){ var b=estBloco(i); if(!b.perguntas[j]) b.perguntas[j]={resp:'',warned:false,red:false,tentou:'',chk:{}}; return b.perguntas[j]; }
+
+/* ====== ANTICÓPIA (motor validado — Português 7º, 08/10/2026) ====== */
+function normPal(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/<[^>]*>/g,' ').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+}
+function maiorRun(aw,bw){
+  var bStr=' '+bw.join(' ')+' ', best=0;
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>0; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ if(len>best)best=len; break; }
+    }
+  }
+  return best;
+}
+function cobertoPorRuns(aw,bw,minRun){
+  var bStr=' '+bw.join(' ')+' ', cov=new Array(aw.length).fill(false);
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>=minRun; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)cov[k]=true; break; }
+    }
+  }
+  return cov.filter(Boolean).length;
+}
+function ehCopia(resp, textoBloco, pergunta){
+  var a=normPal(resp), src=normPal(textoBloco), q=normPal(pergunta);
+  if(a.length<5) return false;
+  var qStr=' '+q.join(' ')+' ', keep=new Array(a.length).fill(true);
+  for(var i=0;i<a.length;i++){
+    for(var len=a.length-i; len>=4; len--){
+      var sub=a.slice(i,i+len).join(' ');
+      if(qStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)keep[k]=false; break; }
+    }
+  }
+  var af=a.filter(function(w,idx){return keep[idx];});
+  if(af.length<5) return false;
+  var run=maiorRun(af,src);
+  var cov=cobertoPorRuns(af,src,5);
+  var ratio=cov/af.length;
+  return run>=8 || ratio>0.6;
+}
+
+/* ====== RENDER ====== */
+function textoPlano(bloco){ return bloco.texto.join(' '); }
+function irBloco(i){ var el=document.getElementById('bloco'+i); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function render(){
+  var cont=document.getElementById('blocos'); cont.innerHTML='';
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    var div=document.createElement('div'); div.className='bloco '+bloco.u+(b.aberto?'':' travado'); div.id='bloco'+i;
+    var html='<div class="bloco-cab"><div class="num">'+(i+1)+'</div><div><div class="porto">'+bloco.porto+'</div><h3>'+bloco.emoji+' '+bloco.titulo+'</h3></div></div>';
+    if(!b.aberto){
+      html+='<div class="cadeado">🔒 Este posto liga quando você conferir o posto anterior.</div>';
+      div.innerHTML=html; cont.appendChild(div); return;
+    }
+    html+='<div class="bloco-corpo"><div class="texto">';
+    bloco.texto.forEach(function(p){ html+= (p.indexOf('<div')===0 || p.indexOf('<ul')===0 ? p : '<p>'+p+'</p>'); });
+    html+='</div>';
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      var tagTxt=p.tag==='conc'?'Conceito':'Aplicação';
+      html+='<div class="perg'+(ep.red?' red':'')+'" id="perg'+i+'_'+j+'">';
+      html+='<span class="tag '+p.tag+'">'+tagTxt+'</span>';
+      html+='<label>'+(j+1)+'. '+p.q+'</label>';
+      html+='<textarea id="ta'+i+'_'+j+'" oninput="digitou('+i+','+j+')">'+(ep.resp||'')+'</textarea>';
+      html+='<div class="aviso" id="av'+i+'_'+j+'"></div>';
+      html+='<div class="modelo" id="mod'+i+'_'+j+'"><span class="lab">Resposta-modelo</span><p>'+p.modelo+'</p>';
+      html+='<div class="chk" id="chk'+i+'_'+j+'"></div></div>';
+      html+='</div>';
+    });
+    html+='<button class="conferir" id="conf'+i+'" onclick="conferir('+i+')">✔️ Conferir este posto</button>';
+    html+='<div class="status-bloco" id="st'+i+'"></div>';
+    if(i<BLOCOS.length-1){ html+='<div class="prox" id="px'+i+'"></div>'; }
+    html+='</div>';
+    div.innerHTML=html;
+    cont.appendChild(div);
+  });
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    if(b.aberto && b.conferido){ mostrarConferido(i); }
+    atualizarBotao(i);
+  });
+  atualizarRelatorio();
+  atualizarTrilhaFim();
+}
+
+function digitou(i,j){
+  var ep=estPerg(i,j);
+  ep.resp=document.getElementById('ta'+i+'_'+j).value;
+  if(ep.red){
+    var bloco=BLOCOS[i];
+    if(!ehCopia(ep.resp, textoPlano(bloco), bloco.perguntas[j].q)){
+      ep.red=false;
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso'; av.textContent='';}
+    }
+  }
+  atualizarBotao(i);
+  salvar();
+  atualizarRelatorio();
+}
+
+function atualizarBotao(i){
+  var b=estBloco(i); if(!b.aberto) return;
+  var btn=document.getElementById('conf'+i); if(!btn) return;
+  var todas=true;
+  BLOCOS[i].perguntas.forEach(function(p,j){
+    var v=(document.getElementById('ta'+i+'_'+j)||{}).value||estPerg(i,j).resp||'';
+    if(v.trim().length<3) todas=false;
+  });
+  btn.disabled=!todas;
+}
+
+function conferir(i){
+  var bloco=BLOCOS[i], b=estBloco(i);
+  var algumBloqueado=false;
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    ep.resp=document.getElementById('ta'+i+'_'+j).value;
+    var av=document.getElementById('av'+i+'_'+j);
+    var copia=ehCopia(ep.resp, textoPlano(bloco), p.q);
+    if(copia){
+      if(!ep.warned){
+        ep.warned=true; ep.tentou=ep.resp;
+        av.className='aviso amarelo';
+        av.innerHTML='✋ Boa parte da sua resposta está igual ao texto. Tente <b>reescrever com as suas palavras</b> — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples: o que vale é ser <b>SEU</b>.';
+        algumBloqueado=true;
+      } else {
+        ep.red=true;
+        av.className='aviso vermelho';
+        av.innerHTML='🔴 Esta resposta continua muito parecida com o texto. Ela foi aceita, mas ficou marcada para revisar. Se reescrever com as suas palavras, a marca some.';
+        document.getElementById('perg'+i+'_'+j).classList.add('red');
+      }
+    } else {
+      ep.red=false;
+      if(av){ av.className='aviso'; av.textContent=''; }
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+    }
+  });
+  salvar();
+  if(algumBloqueado){
+    document.getElementById('st'+i).innerHTML='<span style="color:var(--ambar)">✍️ Reescreva as respostas marcadas em amarelo e clique em Conferir de novo.</span>';
+    return;
+  }
+  b.conferido=true;
+  if(i<BLOCOS.length-1){ estBloco(i+1).aberto=true; }
+  salvar();
+  render();
+  var alvo=document.getElementById('bloco'+i);
+  if(alvo) alvo.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mostrarConferido(i){
+  var bloco=BLOCOS[i];
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    var mod=document.getElementById('mod'+i+'_'+j); if(mod) mod.classList.add('show');
+    if(ep.red){ var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.add('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso vermelho'; av.innerHTML='🔴 Resposta marcada para revisar (muito parecida com o texto). Reescreva com as suas palavras para tirar a marca.';}
+    }
+    var chk=document.getElementById('chk'+i+'_'+j); if(chk){
+      var h='<b style="font-size:.8rem;color:#8fe0b4">Confira você: a sua resposta…</b>';
+      p.chk.forEach(function(pt,k){
+        var val=ep.chk[k]||'';
+        h+='<div class="item"><span>'+pt+'</span><span class="simnao">'
+         +'<button class="sim'+(val==='sim'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'sim\')">Sim</button>'
+         +'<button class="nao'+(val==='nao'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'nao\')">Não</button>'
+         +'</span></div>';
+      });
+      chk.innerHTML=h;
+    }
+  });
+  atualizarStatusBloco(i);
+  var btn=document.getElementById('conf'+i); if(btn){ btn.textContent='✔️ Posto conferido'; btn.disabled=true; }
+  if(i<BLOCOS.length-1){
+    var px=document.getElementById('px'+i);
+    if(px) px.innerHTML='<a href="#bloco'+(i+1)+'" onclick="irBloco('+(i+1)+');return false;">➡️ Ir para o próximo posto</a>';
+  }
+}
+
+function marcarChk(i,j,k,val){
+  var ep=estPerg(i,j); ep.chk[k]=val;
+  salvar(); mostrarConferido(i); atualizarStatusBloco(i); atualizarRelatorio();
+}
+
+function statusPergunta(i,j){
+  var ep=estPerg(i,j), p=BLOCOS[i].perguntas[j];
+  if(ep.red) return 'revisar';
+  var temNao=false, todasResp=true;
+  p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao') temNao=true; if(!ep.chk[k]) todasResp=false; });
+  if(temNao) return 'revisar';
+  if(!todasResp) return 'pendente';
+  return 'ok';
+}
+function atualizarStatusBloco(i){
+  var st=document.getElementById('st'+i); if(!st) return;
+  var revisar=false, pendente=false;
+  BLOCOS[i].perguntas.forEach(function(p,j){ var s=statusPergunta(i,j); if(s==='revisar')revisar=true; if(s==='pendente')pendente=true; });
+  if(revisar) st.innerHTML='<span style="color:#ffb3b3">🔁 Este posto tem pontos para revisar.</span>';
+  else if(pendente) st.innerHTML='<span style="color:var(--ambar)">📝 Responda a autoavaliação (Sim/Não) de cada pergunta.</span>';
+  else st.innerHTML='<span style="color:#8fe0b4">✅ Posto concluído com sucesso!</span>';
+  atualizarRelatorio();
+}
+
+function atualizarRelatorio(){
+  var lista=[], totalConf=0, totalRed=0, totalNao=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i); if(!b.conferido) return; totalConf++;
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      if(ep.red){ totalRed++; lista.push('Posto '+(i+1)+' ('+bloco.titulo+'): pergunta '+(j+1)+' — resposta muito parecida com o texto.'); }
+      p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao'){ totalNao++; lista.push('Posto '+(i+1)+' ('+bloco.titulo+'): revisar — "'+pt+'"'); } });
+    });
+  });
+  var rev=document.getElementById('revisar'), rl=document.getElementById('revisar-lista');
+  if(lista.length){ rev.style.display='block'; rl.innerHTML=lista.map(function(x){return '<li>'+x+'</li>';}).join(''); }
+  else { rev.style.display='none'; rl.innerHTML=''; }
+  var rc=document.getElementById('rel-conteudo');
+  rc.innerHTML='<b>Postos conferidos:</b> '+totalConf+' de '+BLOCOS.length+'.<br>'
+    +'<b>Respostas marcadas (muito parecidas com o texto):</b> '+totalRed+'.<br>'
+    +'<b>Pontos marcados como "Não" na autoavaliação:</b> '+totalNao+'.<br>'
+    +(lista.length? '<span style="color:#ffb3b3">Há '+lista.length+' ponto(s) para revisar (lista acima).</span>' : '<span style="color:#8fe0b4">Sem pontos pendentes para revisar. 👏</span>');
+}
+
+/* ====== EXPORTAR / IMPORTAR / ZERAR ====== */
+function exportar(){
+  var dados=JSON.stringify(estado,null,2);
+  var blob=new Blob([dados],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='leitura-guiada_rede-relampago.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ estado=JSON.parse(r.result); salvar(); render(); mostrarModal('✅ Progresso importado!',false); }catch(e){ mostrarModal('❌ Arquivo inválido.',false); } };
+  r.readAsText(f);
+}
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Tem certeza que quer apagar TODO o progresso desta leitura? (O Quiz continua destravado se já tiver sido destravado.)',true); }
+function mostrarModal(txt,confirmar){
+  document.getElementById('modal-txt').innerHTML=txt;
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none';
+  document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar && acaoZerar){ var c=estado.concluido, ce=estado.concluidoEm; estado={blocos:{}}; if(c){estado.concluido=true; estado.concluidoEm=ce;} salvar(); render(); } acaoZerar=null; fecharModal(); };
+}
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+render();
+</script>
+</body>
+</html>
