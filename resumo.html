@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo · Rede Relâmpago · Ciências 6º</title>
+<style>
+  :root{--palco:#0b1020;--palco2:#141a2e;--aco:#242c44;--aco2:#343f63;--ambar:#ffcf33;--magenta:#ff4d9d;--ciano:#2dd4ff;--verde:#3ddc84;--vermelho:#ff5d5d;--texto:#eaf0f8;--cinza:#8f98b2}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1100px 480px at 50% -10%,#15214a,#0b1020 60%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+  header{background:linear-gradient(120deg,#0e1a3e,#2a1840);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--amarelo,#ffcf33);border-bottom-color:var(--ambar)}
+  header .selo{font-size:.78rem;letter-spacing:2px;color:#ffe9ad;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#e7dcf5;font-size:.92rem}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+  .barra-nav a.on{background:var(--ambar);color:#2a2000;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--ambar);font-size:1.1rem;margin-bottom:8px}
+  .sec{margin:26px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sec h2{font-size:1.25rem}
+  .sec .pill{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:12px;background:var(--ciano);color:#042030;font-weight:bold}
+  .sec .pill.c16{background:var(--magenta);color:#2a0618}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .card{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:14px;border-top:4px solid var(--ciano)}
+  .card.c16{border-top-color:var(--magenta)}
+  .card h3{font-size:1rem;margin-bottom:8px}
+  .card ul{margin-left:18px}
+  .card li{margin-bottom:5px;font-size:.93rem}
+  .card b{color:var(--ciano)}
+  .card.c16 b{color:var(--magenta)}
+  .postit{background:#ffe88a;color:#3a2a00;border-radius:4px;padding:12px 14px;font-size:.92rem;box-shadow:3px 4px 10px rgba(0,0,0,.4);transform:rotate(-1deg);margin:12px 0}
+  .postit b{color:#7a4a00}
+  .peg{background:#3a1414;border:2px solid var(--vermelho);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:.92rem}
+  .peg b{color:#ffb3b3}
+  .flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .flip{perspective:900px;height:200px;cursor:pointer}
+  .flip .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .inner{transform:rotateY(180deg)}
+  .flip .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:.88rem}
+  .flip .front{background:linear-gradient(135deg,#1d2950,#141a2e);border:1px solid var(--aco2);font-weight:bold}
+  .flip .front small{display:block;color:var(--cinza);font-weight:normal;font-size:.72rem;margin-top:6px}
+  .flip .back{background:#0e2b1f;border:1px solid var(--verde);transform:rotateY(180deg)}
+  .tabela{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+  .tabela th,.tabela td{border:1px solid var(--aco);padding:7px 9px;text-align:left;vertical-align:top}
+  .tabela th{background:#161f3c}
+  .fluxo{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:8px}
+  .fluxo .et{flex:1;min-width:120px;background:#12193a;border:1px solid var(--aco2);border-left:4px solid var(--magenta);border-radius:0 10px 10px 0;padding:10px;font-size:.86rem}
+  .fluxo .et b{color:var(--magenta)}
+  .gloss{columns:2;column-gap:18px}
+  .gloss div{break-inside:avoid;margin-bottom:8px;font-size:.9rem}
+  .gloss b{color:var(--ambar)}
+  @media(max-width:600px){.gloss{columns:1}}
+  .fim{background:linear-gradient(120deg,#122a1f,#163a2a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:24px;text-align:center}
+  .fim h3{color:#8fe0b4;margin-bottom:8px}
+  .fim button{background:var(--verde);color:#04231a;border:none;border-radius:10px;padding:12px 20px;font-size:1rem;font-weight:bold;margin:6px}
+  .fim button:disabled{background:#1c2340;color:#6f7794;cursor:not-allowed}
+  .fim a.btn{display:inline-block;margin:6px;background:var(--ciano);color:#042030;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:10px}
+  .fim a.btn.off{background:#1c2340;color:#6f7794;pointer-events:none}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem;cursor:pointer;font-family:inherit}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(5,4,8,.96);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:22px;max-width:440px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal .big{font-size:2.2rem}
+  .modal a{display:inline-block;background:var(--ciano);color:#042030;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Rede Relâmpago · Ciências 6º ano · CCF</div>
+  <h1>🗺️ Resumo</h1>
+  <p>Tudo que cai, em cards, cartas e post-its · Capítulos 15 e 16</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a class="on" href="resumo.html">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>🗺️ Mapa da Rede Relâmpago</h2>
+    <p>Use este resumo para fechar as dúvidas que o Quiz mostrou e para revisar na véspera. Leia até o fim: lá embaixo está o botão <b>"Li o resumo até o fim"</b>, que destrava o <b>📝 Simulado</b>.</p>
+  </div>
+  <div class="painel"><span id="salvo">📏 Rolagem máxima: 0%</span><button class="mini" onclick="exportar()">📥 Exportar</button></div>
+
+  <div class="sec"><span class="pill">Capítulo 15</span><h2>⚡ Coordenação nos seres vivos</h2></div>
+  <div class="grid">
+    <div class="card"><h3>⚡ O sistema nervoso</h3><ul>
+      <li>É o <b>centro de controle</b>: recebe, transmite e reage a estímulos.</li>
+      <li>Estímulo <b>externo</b> = do ambiente; <b>interno</b> = do próprio corpo.</li>
+      <li>Resposta <b>voluntária</b> (decidimos: caminhar) × <b>involuntária</b> (sozinha: coração, fome).</li>
+      <li>As informações viajam como <b>impulsos nervosos</b>.</li></ul></div>
+    <div class="card"><h3>🐙 Coordenação nos animais</h3><ul>
+      <li><b>Centralizado</b>: tem centro nervoso/cérebro.</li>
+      <li><b>Difuso</b>: rede espalhada igualmente pelo corpo.</li>
+      <li><b>Ganglionar</b>: gânglios pelo corpo.</li>
+      <li>Invertebrados (anêmona, planária, inseto): sistema <b>simples</b> (comer, se defender).</li></ul></div>
+    <div class="card"><h3>🔌 Neurônios e sinapses</h3><ul>
+      <li><b>Neurônio</b> = célula do sistema nervoso. <b>Nervo</b> = feixe de fibras.</li>
+      <li><b>Impulso nervoso</b>: começa no neurônio e vai <b>sempre no mesmo sentido</b>.</li>
+      <li><b>Sinapse</b>: espaço entre neurônios (eles não se tocam).</li>
+      <li><b>Neurotransmissores</b>: substâncias químicas que levam a informação na sinapse.</li></ul></div>
+    <div class="card"><h3>🧠 SNC: encéfalo e medula</h3><ul>
+      <li><b>SNC</b> = encéfalo + medula espinal (interpreta).</li>
+      <li><b>Encéfalo</b> = cérebro (raciocínio, memória, emoções) + cerebelo (equilíbrio e coordenação) + tronco encefálico (<b>batimentos e respiração</b>).</li>
+      <li>Proteção: <b>crânio</b>, <b>coluna vertebral</b> e <b>meninges</b> (3 membranas).</li>
+      <li><b>Meningite</b>: inflamação das meninges (vírus/bactéria); há vacinas.</li></ul></div>
+    <div class="card"><h3>🦴 Medula e arco reflexo</h3><ul>
+      <li><b>Medula espinal</b>: do tronco até o fim da coluna; dá respostas rápidas.</li>
+      <li><b>Arco reflexo</b>: a <b>medula</b> responde direto (tira a mão), sem passar pelo cérebro.</li>
+      <li>A <b>dor</b> só é sentida depois, quando o impulso chega ao cérebro.</li>
+      <li><b>Lesão medular</b>: corta a comunicação; quanto mais alta, maior a parte comprometida.</li></ul></div>
+    <div class="card"><h3>🛰️ SNP e tipos de neurônio</h3><ul>
+      <li><b>SNP</b> = os nervos (levam e trazem informações).</li>
+      <li><b>Somático</b>: ações voluntárias. <b>Autônomo</b>: involuntárias (coração, rins).</li>
+      <li>Neurônios: <b>sensitivos</b> (recebem) → <b>associação</b> (processam no SNC) → <b>motores</b> (levam a resposta aos músculos/glândulas).</li>
+      <li><b>Nervo misto</b>: sensitivos + motores juntos.</li></ul></div>
+    <div class="card"><h3>⚠️ Drogas e o sistema nervoso</h3><ul>
+      <li>Substâncias que não produzimos; prescritas, agem como <b>remédios</b> (ex.: analgésico bloqueia a dor).</li>
+      <li><b>Depressoras</b>: diminuem a atividade dos neurônios.</li>
+      <li><b>Estimulantes</b>: aumentam (agitação, euforia).</li>
+      <li><b>Perturbadoras</b>: distorcem a percepção da realidade. Excesso → dependência, danos, overdose.</li></ul></div>
+  </div>
+
+  <div class="sec"><span class="pill">Capítulo 15</span><h2>🃏 Cartas da coordenação (clique para virar)</h2></div>
+  <div class="flips">
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">Neurônio × nervo<small>qual a diferença?</small></div><div class="face back"><b>Neurônio</b> = a célula. <b>Nervo</b> = um feixe (conjunto) de fibras de neurônios.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">Encéfalo<small>quais as 3 partes?</small></div><div class="face back"><b>Cérebro</b> (raciocínio/memória), <b>cerebelo</b> (equilíbrio/coordenação) e <b>tronco encefálico</b> (respiração/batimentos).</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">Arco reflexo<small>quem responde primeiro?</small></div><div class="face back">A <b>medula espinal</b> dá a resposta rápida sem passar pelo cérebro. A <b>dor</b> chega depois.</div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">SNP<small>somático × autônomo?</small></div><div class="face back"><b>Somático</b> = voluntário (caminhar). <b>Autônomo</b> = involuntário (coração, rins).</div></div></div>
+  </div>
+  <div class="postit">📌 <b>Dica de prova:</b> decore pelas palavras-chave: <b>sinapse</b> = espaço + neurotransmissores · <b>tronco encefálico</b> = respiração e batimentos · <b>cerebelo</b> = equilíbrio · <b>arco reflexo</b> = medula antes do cérebro.</div>
+
+  <div class="sec"><span class="pill c16">Capítulo 16</span><h2>👁️👂 Os sentidos: visão e audição</h2></div>
+  <div class="grid">
+    <div class="card c16"><h3>📡 Sistema sensorial</h3><ul>
+      <li>Órgãos: olhos, orelhas, nariz, língua e pele, com <b>receptores sensoriais</b>.</li>
+      <li>Convertem estímulos em <b>impulsos nervosos</b> → nervos → cérebro → sensações.</li>
+      <li>Estímulos: <b>sonoros, térmicos, de pressão, luminosos e químicos</b>.</li>
+      <li>Mais receptores numa área = mais <b>sensível</b>.</li></ul></div>
+    <div class="card c16"><h3>💡 A visão e a luz</h3><ul>
+      <li><b>Luz</b> = onda <b>eletromagnética</b> (atravessa o vácuo).</li>
+      <li>Para ver: o objeto é iluminado e <b>reflete</b> a luz até os olhos.</li>
+      <li>No <b>escuro total</b> não vemos (não há luz para refletir).</li></ul></div>
+    <div class="card c16"><h3>👁️ O olho por dentro</h3><ul>
+      <li>Camadas: <b>esclera</b> (externa), <b>corioide</b> e <b>retina</b>.</li>
+      <li><b>Córnea</b> (entra luz/focaliza), <b>lente/cristalino</b> (ajusta o foco), <b>íris</b> (controla a <b>pupila</b>).</li>
+      <li>Pupila <b>dilata</b> no escuro e <b>contrai</b> na claridade.</li>
+      <li><b>Retina</b>: fotorreceptores → <b>nervo óptico</b> → cérebro. Imagem chega <b>invertida</b>.</li></ul></div>
+    <div class="card c16"><h3>🔴🟢🔵 Cones e bastonetes</h3><ul>
+      <li><b>Cones</b>: cores e detalhes, na <b>claridade</b> (3 tipos: azul, verde, vermelho).</li>
+      <li><b>Bastonetes</b>: enxergar no <b>escuro</b>/pouca luz.</li>
+      <li><b>Ponto cego</b>: onde o nervo óptico entra; sem fotorreceptores.</li></ul></div>
+    <div class="card c16"><h3>🕶️ Distúrbios da visão</h3><ul>
+      <li><b>Miopia</b>: não vê de longe → lentes <b>divergentes</b>.</li>
+      <li><b>Hipermetropia</b>: não vê de perto → lentes <b>convergentes</b>.</li>
+      <li><b>Astigmatismo</b>: córnea/lente irregular → lentes <b>cilíndricas</b>.</li>
+      <li><b>Catarata</b>: lente perde a <b>transparência</b>. <b>Daltonismo</b>: cones (teste de Ishihara).</li></ul></div>
+    <div class="card c16"><h3>👂 A audição e o som</h3><ul>
+      <li><b>Ondas sonoras</b> = ondas <b>mecânicas</b> (precisam de meio material).</li>
+      <li>Som é mais <b>rápido nos sólidos</b>. No vácuo não há som.</li>
+      <li>Orelha: <b>externa, média, interna</b>. Também cuida do <b>equilíbrio</b>.</li>
+      <li><b>Tuba auditiva</b>: liga à faringe e <b>equilibra a pressão</b> do tímpano.</li></ul></div>
+    <div class="card c16"><h3>⚖️ Equilíbrio e inclusão</h3><ul>
+      <li><b>Vestíbulo</b> e <b>ductos semicirculares</b> (orelha interna) = equilíbrio e posição do corpo.</li>
+      <li><b>Tontura</b>: o líquido continua se movendo depois de girar.</li>
+      <li>Surdez = perda total. Apoios: prótese auditiva, implante coclear, <b>Libras</b> (não é universal).</li>
+      <li>Visão: cegueira = amaurose; <b>Braile</b> (Louis Braille, séc. XIX).</li></ul></div>
+  </div>
+
+  <div class="sec"><span class="pill c16">Capítulo 16</span><h2>🔊 O caminho do som (em ordem)</h2></div>
+  <div class="fluxo">
+    <div class="et"><b>1.</b> Pavilhão auricular (orelha externa) capta as ondas.</div>
+    <div class="et"><b>2.</b> Membrana timpânica (tímpano) vibra.</div>
+    <div class="et"><b>3.</b> Ossículos: martelo, bigorna e estribo (orelha média).</div>
+    <div class="et"><b>4.</b> Cóclea (orelha interna): o líquido estimula células sensitivas.</div>
+    <div class="et"><b>5.</b> Nervo auditivo leva ao cérebro, que interpreta o som.</div>
+  </div>
+
+  <div class="sec"><span class="pill c16">Capítulo 16</span><h2>🔎 Distúrbios visuais — tabela rápida</h2></div>
+  <table class="tabela">
+    <thead><tr><th>Distúrbio</th><th>Problema</th><th>Correção</th></tr></thead>
+    <tbody>
+      <tr><td><b>Miopia</b></td><td>Não enxerga bem de longe</td><td>Lentes divergentes</td></tr>
+      <tr><td><b>Hipermetropia</b></td><td>Não enxerga bem de perto</td><td>Lentes convergentes</td></tr>
+      <tr><td><b>Astigmatismo</b></td><td>Curvatura irregular da córnea/lente</td><td>Lentes cilíndricas</td></tr>
+      <tr><td><b>Catarata</b></td><td>Lente perde a transparência</td><td>Troca por lente artificial</td></tr>
+      <tr><td><b>Daltonismo</b></td><td>Alteração no pigmento dos cones (hereditário)</td><td>Diagnóstico: teste de Ishihara</td></tr>
+    </tbody>
+  </table>
+  <div class="peg">⚠️ <b>Pegadinha:</b> quem controla a respiração e os batimentos é o <b>tronco encefálico</b> (não o cérebro). E, no reflexo, quem responde primeiro é a <b>medula espinal</b> (não o cérebro).</div>
+
+  <div class="sec"><span class="pill c16">Capítulo 16</span><h2>⚖️ Luz × Som</h2></div>
+  <table class="tabela">
+    <thead><tr><th> </th><th>Luz</th><th>Som</th></tr></thead>
+    <tbody>
+      <tr><td><b>Tipo de onda</b></td><td>Eletromagnética</td><td>Mecânica</td></tr>
+      <tr><td><b>Precisa de meio material?</b></td><td>Não (atravessa o vácuo)</td><td>Sim (sólido, líquido ou gás)</td></tr>
+      <tr><td><b>Órgão do sentido</b></td><td>Olho (visão)</td><td>Orelha (audição)</td></tr>
+    </tbody>
+  </table>
+  <div class="postit">📌 <b>Por isso</b> vemos a luz do Sol, mas não ouvimos as explosões solares: entre a Terra e o Sol há vácuo, e o som (onda mecânica) não se propaga sem moléculas.</div>
+
+  <div class="sec"><h2>📚 Glossário</h2></div>
+  <div class="gloss">
+    <div><b>Estímulo</b> — informação do ambiente (externo) ou do corpo (interno) que o sistema nervoso percebe.</div>
+    <div><b>Impulso nervoso</b> — "mensagem" que corre pelos neurônios, sempre no mesmo sentido.</div>
+    <div><b>Neurônio</b> — célula do sistema nervoso.</div>
+    <div><b>Nervo</b> — feixe de fibras nervosas.</div>
+    <div><b>Sinapse</b> — espaço entre dois neurônios onde a informação passa.</div>
+    <div><b>Neurotransmissor</b> — substância química que leva a informação na sinapse.</div>
+    <div><b>SNC</b> — Sistema Nervoso Central: encéfalo + medula espinal.</div>
+    <div><b>SNP</b> — Sistema Nervoso Periférico: os nervos (somático e autônomo).</div>
+    <div><b>Encéfalo</b> — cérebro + cerebelo + tronco encefálico.</div>
+    <div><b>Meninges</b> — três membranas que protegem o SNC.</div>
+    <div><b>Arco reflexo</b> — caminho da resposta rápida, feita pela medula.</div>
+    <div><b>Retina</b> — camada do olho com os fotorreceptores (cones e bastonetes).</div>
+    <div><b>Cones / bastonetes</b> — células da retina: cores/detalhes × visão no escuro.</div>
+    <div><b>Nervo óptico</b> — leva os impulsos da retina ao cérebro.</div>
+    <div><b>Onda mecânica</b> — onda que precisa de um meio material (som).</div>
+    <div><b>Cóclea</b> — estrutura da orelha interna ligada à audição.</div>
+    <div><b>Tuba auditiva</b> — canal que liga a orelha média à faringe e equilibra a pressão.</div>
+    <div><b>Libras</b> — Língua Brasileira de Sinais (visual-gestual, não universal).</div>
+  </div>
+
+  <div class="fim" id="fim">
+    <h3 id="fim-h3">🔒 Próxima etapa: Simulado</h3>
+    <p id="fim-txt">Role até aqui e confirme a leitura para destravar o Simulado.</p>
+    <button id="btn-li" onclick="confirmarLeitura()" disabled>✅ Li o resumo até o fim</button>
+    <a class="btn off" id="btn-prox" href="simulado.html">📝 Pronto para o Simulado!</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. ⚡</div>
+</div>
+
+<div class="modal-bg" id="lock">
+  <div class="modal">
+    <div class="big">🔒</div>
+    <p><b>Esta etapa ainda está trancada.</b></p>
+    <p id="lock-txt">Para abrir o Resumo, envie o Quiz.</p>
+    <a href="index.html">Voltar ao início</a>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='rede_relampago';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+function checarTrava(){
+  if(podeAbrir('resumo')) return true;
+  var L=lerJSON(KIT+'_leitura_v1');
+  document.getElementById('lock-txt').textContent=(L&&L.concluido)?'Para abrir o Resumo, envie o Quiz.':'Para abrir o Resumo, conclua a Leitura Guiada e envie o Quiz.';
+  document.getElementById('lock').classList.add('show');
+  document.querySelector('.wrap').style.filter='blur(6px)';
+  return false;
+}
+
+/* ====== ESTADO DO RESUMO ====== */
+var CHAVE=KIT+'_resumo_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {rolagemMax:0}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } document.getElementById('salvo').textContent='📏 Rolagem máxima: '+Math.round(estado.rolagemMax||0)+'%'; }
+function medirRolagem(){
+  var h=document.documentElement; var total=h.scrollHeight-h.clientHeight; var pct= total<=0?100:Math.min(100,(window.scrollY||h.scrollTop)/total*100);
+  if(pct>(estado.rolagemMax||0)){ estado.rolagemMax=pct; salvar(); }
+  var b=document.getElementById('btn-li'); if(!estado.concluido && (estado.rolagemMax||0)>=90){ b.disabled=false; }
+}
+function confirmarLeitura(){ if(estado.concluido) return; estado.concluido=true; estado.concluidoEm=new Date().toISOString(); salvar(); atualizarFim(); }
+function atualizarFim(){
+  var h3=document.getElementById('fim-h3'), txt=document.getElementById('fim-txt'), b=document.getElementById('btn-li'), a=document.getElementById('btn-prox');
+  if(estado.concluido||trilhaLiberada()){ h3.textContent='✅ Resumo lido — Simulado destravado!'; txt.textContent=estado.concluido?'Agora encare o Simulado valendo, como se fosse a prova.':'Trilha liberada pelos pais.'; b.disabled=true; b.textContent=estado.concluido?'✅ Resumo concluído':'✅ Li o resumo até o fim'; a.classList.remove('off'); }
+  else { h3.textContent='🔒 Próxima etapa: Simulado'; txt.textContent=(estado.rolagemMax||0)>=90?'Confirme a leitura para destravar o Simulado.':'Role até o fim da página para habilitar o botão (rolagem: '+Math.round(estado.rolagemMax||0)+'%).'; a.classList.add('off'); }
+  marcarNav();
+}
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='resumo_rede-relampago.json'; a.click(); }
+
+if(checarTrava()){ salvar(); atualizarFim(); window.addEventListener('scroll',function(){ medirRolagem(); atualizarFim(); }); setTimeout(medirRolagem,300); } else { marcarNav(); }
+</script>
+</body>
+</html>
